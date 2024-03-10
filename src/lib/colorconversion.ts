@@ -115,16 +115,3 @@ export function rgb2lab(rgb: number[]) {
 
     return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)];
 }
-
-export function makeColorMoreVibrant(r: number, g: number, b: number, saturationIncrease: number = 0.1) {
-    // Convert RGB to HSL
-    let [h, s, l] = rgbToHsl(r, g, b);
-    
-    // Increase the saturation by a given factor (e.g., 10%)
-    s += saturationIncrease;
-    // Make sure the saturation remains in the [0, 1] range
-    s = Math.min(1, Math.max(0, s));
-    
-    // Convert HSL back to RGB
-    return hslToRgb(h, s, l);
-}
