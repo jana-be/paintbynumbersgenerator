@@ -30,12 +30,6 @@ export function rgbToHsl(r: number, g: number, b: number) {
         }
         h /= 6;
     }
-    // Increase the saturation by a given factor (e.g., 10%)
-    const saturationIncrease = 0.1
-    s += saturationIncrease;
-    // Make sure the saturation remains in the [0, 1] range
-    s = Math.min(1, Math.max(0, s));
-
 
     return [h, s, l];
 }
