@@ -3,7 +3,7 @@
  */
 import { delay, IMap, RGB } from "./common";
 import { KMeans, Vector } from "./lib/clustering";
-import { hslToRgb, lab2rgb, rgb2lab, rgbToHsl } from "./lib/colorconversion";
+import { hslToRgb, lab2rgb, rgb2lab, rgbToHsl, makeColorMoreVibrant} from "./lib/colorconversion";
 import { ClusteringColorSpace, Settings } from "./settings";
 import { Uint8Array2D } from "./structs/typedarrays";
 import { Random } from "./random";
@@ -161,12 +161,15 @@ export class ColorReducer {
                 let rgb: number[];
                 if (settings.kMeansClusteringColorSpace === ClusteringColorSpace.RGB) {
                     rgb = centroid.values;
+                    rgb = makeColorMoreVibrant(rgb[0], rgb[1], rgb[2], 0.2); // Increase the vibrancy by 20%
                 } else if (settings.kMeansClusteringColorSpace === ClusteringColorSpace.HSL) {
                     const hsl = centroid.values;
                     rgb = hslToRgb(hsl[0], hsl[1], hsl[2]);
+                    rgb = makeColorMoreVibrant(rgb[0], rgb[1], rgb[2], 0.2); // Increase the vibrancy by 20%
                 } else if (settings.kMeansClusteringColorSpace === ClusteringColorSpace.LAB) {
                     const lab = centroid.values;
                     rgb = lab2rgb(lab);
+                    rgb = makeColorMoreVibrant(rgb[0], rgb[1], rgb[2], 0.2); // Increase the vibrancy by 20%
                 } else {
                     rgb = centroid.values;
                 }
